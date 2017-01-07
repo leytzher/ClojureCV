@@ -1,12 +1,14 @@
 (ns clojurecv.simplecv
+  (:require [clojure.java.io :as io])
   (:import 
    org.opencv.core.Core
    org.opencv.core.Mat
    org.opencv.imgproc.Imgproc
    org.opencv.highgui.Highgui
 )
-)
 
+
+)
 
 
 ;;; Simple utility functions for OpenCV
@@ -21,7 +23,7 @@
   (Highgui/imwrite file-name image )
 )
 
-;;; Clone matrix
+;;; Clone matrix (useful to quickly create output matrices)
 (defn clone-image [image]
   (.clone image)
 )
@@ -72,4 +74,8 @@
      (imshow mat "Untitled image"))
   ([mat title]
      (show-frame (to-buffered-image mat) title)))
+
+;;; List all files in a directory
+ (defn list-files [directory]
+   (.list (io/file directory)))
 
