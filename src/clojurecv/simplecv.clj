@@ -1,4 +1,4 @@
-(ns cv.simplecv
+(ns clojurecv.simplecv
   (:import 
    org.opencv.core.Core
    org.opencv.core.Mat
