@@ -15,8 +15,12 @@
 ;;; -----------------------------------
 
 ;;; Simple function to load images
-(defn load-image [image]
-  (Highgui/imread image))
+
+(defn load-image
+  [image]
+  (Highgui/imread
+     (.getPath (clojure.java.io/resource image))))
+
 
 ;;; Simple function to write images
 (defn write-image [file-name image]
@@ -79,4 +83,4 @@
  (defn list-files [directory]
    (.list (io/file directory)))
 
-;;; Create list with files in a directory
+
