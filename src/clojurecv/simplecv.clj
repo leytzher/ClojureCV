@@ -79,3 +79,4 @@
  (defn list-files [directory]
    (.list (io/file directory)))
 
+;;; Create list with files in a directory
