@@ -5,10 +5,9 @@
    org.opencv.core.Mat
    org.opencv.imgproc.Imgproc
    org.opencv.highgui.Highgui
-)
-
-
-)
+   org.opencv.highgui.VideoCapture
+   org.opencv.core.CvType
+))
 
 
 ;;; Simple utility functions for OpenCV
@@ -17,9 +16,9 @@
 ;;; Simple function to load images
 
 (defn load-image
-  [image]
-  (Highgui/imread
-     (.getPath (clojure.java.io/resource image))))
+  [path]
+  (Highgui/imread path
+     ))
 
 
 ;;; Simple function to write images
@@ -82,5 +81,31 @@
 ;;; List all files in a directory
  (defn list-files [directory]
    (.list (io/file directory)))
+
+;; Split image in channels:
+(defn split-RGB
+  [mat]
+  (let [b-channel (.clone mat)
+        g-channel (.clone mat)
+        r-channel (.clone mat)
+        BGR (java.util.ArrayList. [b-channel g-channel r-channel])]
+    (Core/split mat BGR)
+    {:r (nth BGR 2)
+     :g (nth BGR 1)
+     :b (nth BGR 0)}))
+
+(defn split-Lab [mat]
+  (let [lab-mat (.clone mat)
+        l-channel (.clone mat)
+        a-channel (.clone mat)
+        b-channel (.clone mat)
+        LAB (java.util.ArrayList. [l-channel a-channel b-channel])]
+    (convert-to-lab mat lab-mat )
+    (Core/split lab-mat LAB)
+    {:l (nth LAB 0)
+     :a (nth LAB 1)
+     :b (nth LAB 2)}))
+
+
 
 
