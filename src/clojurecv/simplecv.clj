@@ -106,6 +106,14 @@
      :a (nth LAB 1)
      :b (nth LAB 2)}))
 
+;;; show image metadata
+(defn image-metadata [mat]
+  (let [rows (.rows mat)
+        columns (.cols mat)
+        type (.type mat)]
+    {:rows rows :columns columns :type type}))
+
+
 
 
 
