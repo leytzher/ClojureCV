@@ -6,8 +6,8 @@
    org.opencv.imgproc.Imgproc
    org.opencv.highgui.Highgui
    org.opencv.highgui.VideoCapture
-   org.opencv.core.CvType
-))
+   org.opencv.core.CvType 
+   ))
 
 
 ;;; Simple utility functions for OpenCV
@@ -112,6 +112,25 @@
         columns (.cols mat)
         type (.type mat)]
     {:rows rows :columns columns :type type}))
+
+
+;;===============================
+;; Read video from file
+
+(defn open-video [path]
+  (VideoCapture. path))
+
+(defn video-properties [movie]
+  (let [width (int (.get movie 3))
+        height (int (.get movie 4))
+        number-of-frames (int (.get movie 7))
+        fps (int (.get movie 5))
+        format (int  (.get movie 8))] 
+    {:width width
+     :height height
+     :number-of-frames number-of-frames
+     :fps fps
+     :format format}))
 
 
 
